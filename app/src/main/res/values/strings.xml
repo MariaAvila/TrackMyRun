@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Track My Run</string>
+    <string name="clearText">Clear</string>
+    <string name="startText">Start Run</string>
+    <string name="endText">End Run</string>
+
+    <!-- Output to TextView styled with a little HTML -->
+    <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
+    <string name="start_time"><![CDATA[<b>Start:</b>]]></string>
+    <string name="end_time"><![CDATA[<b>End:</b>]]></string>
+    <string name="distance_travelled"><![CDATA[<b>Total Distance:</b>]]></string>
+    <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
+    <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
+
+    <!-- Toast to play after Clear button has been pressed -->
+    <string name="cleared_message">All your data is gone forever.</string>
+
+    <string name="header_text">Run Results</string>
+    <string name="close">Close</string>
+    <string name="minutes_length">%d minutes on %s</string>
+    <string name="hours_length">%d hours on %s</string>
+    <string name="seconds_length">%d seconds on %s</string>
+</resources>

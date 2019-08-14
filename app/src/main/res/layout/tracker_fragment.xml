@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="trackerViewModel"
+                type="com.example.trackmyrun.tracker.TrackerViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".tracker.TrackerFragment">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/clear_button"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/end_button"
+                android:id="@+id/run_list"/>
+        <Button
+                android:text="@string/clearText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/clear_button"
+                android:enabled="@{trackerViewModel.clearButtonVisible}"
+                style="@style/Widget.AppCompat.Button.Colored" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_margin="@dimen/normalMargin"/>
+        <Button
+                android:text="@string/endText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/end_button"
+                android:enabled="@{trackerViewModel.endButtonVisible}"
+                app:layout_constraintStart_toEndOf="@+id/start_button" app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_margin="@dimen/normalMargin"/>
+        <Button
+                android:text="@string/startText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/start_button"
+                android:enabled="@{trackerViewModel.startButtonVisible}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/end_button"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                style="@style/Widget.AppCompat.Button.Colored" android:layout_margin="@dimen/normalMargin"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

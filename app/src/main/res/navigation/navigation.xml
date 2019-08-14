@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
+            app:startDestination="@id/trackerFragment">
+
+    <fragment android:id="@+id/trackerFragment" android:name="com.example.trackmyrun.tracker.TrackerFragment"
+              android:label="tracker_fragment" tools:layout="@layout/tracker_fragment">
+        <action android:id="@+id/action_trackerFragment_to_detailsFragment" app:destination="@id/detailsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/detailsFragment" android:name="com.example.trackmyrun.details.DetailsFragment"
+              android:label="details_fragment" tools:layout="@layout/details_fragment">
+        <action android:id="@+id/action_detailsFragment_to_trackerFragment" app:destination="@id/trackerFragment"/>
+    </fragment>
+</navigation>
