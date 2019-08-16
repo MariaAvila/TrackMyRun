@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -57,13 +58,15 @@ class TrackerFragment : Fragment(){
 
         binding.lifecycleOwner = this
 
-        val adapter = MyRunAdapter()
+        val adapter = MyRunAdapter(MyRunListener { myRunId ->
+            Toast.makeText(context,"${myRunId}",Toast.LENGTH_LONG).show()
+        })
 
         binding.runList.adapter =adapter
 
         trackerViewModel.runs.observe(viewLifecycleOwner, Observer {
             it?.let{
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 
