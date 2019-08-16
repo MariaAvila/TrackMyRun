@@ -11,5 +11,6 @@
     <fragment android:id="@+id/detailsFragment" android:name="com.example.trackmyrun.details.DetailsFragment"
               android:label="details_fragment" tools:layout="@layout/details_fragment">
         <action android:id="@+id/action_detailsFragment_to_trackerFragment" app:destination="@id/trackerFragment"/>
+        <argument android:name="runId" app:argType="long"/>
     </fragment>
 </navigation>

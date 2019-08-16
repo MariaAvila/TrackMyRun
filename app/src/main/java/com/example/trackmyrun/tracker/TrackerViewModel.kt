@@ -81,6 +81,10 @@ class TrackerViewModel(
     val showSnackBarEvent: LiveData<Boolean?>
         get() = _showSnackbarEvent
 
+    private val _navigateToRunDetail= MutableLiveData<Long>()
+    val navigateToRunDetail
+        get() = _navigateToRunDetail
+
     /*
     INIT #####################################################################################################
      */
@@ -144,6 +148,9 @@ class TrackerViewModel(
             newRun.startPositionLat = pastlocation?.latitude!!
             newRun.startPositionLon = pastlocation?.longitude!!
 
+            newRun.endPositionLat = pastlocation?.latitude!!
+            newRun.endPositionLon = pastlocation?.longitude!!
+
             insert(newRun)
 
             currentRun.value = getCurrentRunFromDatabase()
@@ -164,6 +171,9 @@ class TrackerViewModel(
             // Update the night in the database to add the end time.
             oldRun.endTimeMilli = System.currentTimeMillis()
             oldRun.distanceTravelled = distanceTravelled
+
+            if (currentlocation == null) currentlocation = pastlocation
+
             oldRun.endPositionLat = currentlocation?.latitude!!
             oldRun.endPositionLon = currentlocation?.longitude!!
 
@@ -202,6 +212,14 @@ class TrackerViewModel(
 
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = null
+    }
+
+    fun onRunClicked(id: Long) {
+        _navigateToRunDetail.value = id
+    }
+
+    fun onRunDetailNavigated() {
+        _navigateToRunDetail.value = null
     }
 
 

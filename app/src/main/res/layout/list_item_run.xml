@@ -21,6 +21,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:src="@drawable/man_person_run_runner_running"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -35,7 +36,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/running_image"
                 app:layout_constraintTop_toTopOf="@+id/running_image"
-                tools:text="Wednesday"/>
+                app:runDurationFormatted="@{run}"
+                tools:text="30 minutes"/>
 
         <TextView
                 android:id="@+id/distance_runned"
@@ -46,6 +48,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/run_length"
                 app:layout_constraintTop_toBottomOf="@+id/run_length"
-                tools:text="Excellent!!!"/>
+                app:distanceRunned="@{run}"
+                tools:text="3 meters"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

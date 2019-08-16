@@ -12,15 +12,12 @@ import com.example.trackmyrun.R
 import com.example.trackmyrun.database.MyRun
 import com.example.trackmyrun.databinding.ListItemRunBinding
 
-class MyRunAdapter(val clickListener: MyRunListener): ListAdapter<MyRun, MyRunAdapter.ViewHolder>(MyRunDiffCallback()) {
+class MyRunAdapter(val clickListener: MyRunListener):
+    ListAdapter<MyRun, MyRunAdapter.ViewHolder>(MyRunDiffCallback()) {
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val res = holder.itemView.context.resources
         holder.bind(getItem(position)!!,clickListener)
-        holder.runLenght.text = convertDurationToFormatted(getItem(position)!!.startTimeMilli,
-            getItem(position)!!.endTimeMilli,res)
-        holder.distanceRunned.text = "${getItem(position)!!.distanceTravelled} meters runned"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,8 +25,6 @@ class MyRunAdapter(val clickListener: MyRunListener): ListAdapter<MyRun, MyRunAd
     }
 
     class ViewHolder(val binding: ListItemRunBinding) : RecyclerView.ViewHolder(binding.root){
-        val runLenght = binding.runLength
-        val distanceRunned = binding.distanceRunned
         fun bind(item: MyRun, clickListener: MyRunListener) {
             binding.run = item
             binding.clickListener = clickListener

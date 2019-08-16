@@ -1,30 +1,19 @@
 package com.example.trackmyrun.tracker
 
 import android.annotation.SuppressLint
-import android.content.Context.LOCATION_SERVICE
-import android.content.IntentSender
-import android.location.Criteria
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.trackmyrun.databinding.TrackerFragmentBinding
 import com.example.trackmyrun.R
 import com.example.trackmyrun.database.MyRunDatabase
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
-import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 
 class TrackerFragment : Fragment(){
@@ -34,10 +23,15 @@ class TrackerFragment : Fragment(){
         fun newInstance() = TrackerFragment()
     }
 
+
     @SuppressLint("MissingPermission")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
+        if(savedInstanceState != null){
+
+        }
 
         val binding: TrackerFragmentBinding = DataBindingUtil.inflate(inflater,
             R.layout.tracker_fragment,container,false)
@@ -59,7 +53,8 @@ class TrackerFragment : Fragment(){
         binding.lifecycleOwner = this
 
         val adapter = MyRunAdapter(MyRunListener { myRunId ->
-            Toast.makeText(context,"${myRunId}",Toast.LENGTH_LONG).show()
+            //Toast.makeText(context,"${myRunId}",Toast.LENGTH_LONG).show()
+            trackerViewModel.onRunClicked(myRunId)
         })
 
         binding.runList.adapter =adapter
@@ -67,6 +62,14 @@ class TrackerFragment : Fragment(){
         trackerViewModel.runs.observe(viewLifecycleOwner, Observer {
             it?.let{
                 adapter.submitList(it)
+            }
+        })
+
+        trackerViewModel.navigateToRunDetail.observe(this, Observer {run ->
+            run?.let {
+                this.findNavController().navigate(TrackerFragmentDirections.
+                    actionTrackerFragmentToDetailsFragment(run))
+                trackerViewModel.onRunDetailNavigated()
             }
         })
 
@@ -101,5 +104,9 @@ class TrackerFragment : Fragment(){
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+    }
 
 }
