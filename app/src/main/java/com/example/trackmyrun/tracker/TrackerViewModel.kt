@@ -42,6 +42,8 @@ class TrackerViewModel(
     //holds current location accessed
     private var currentlocation : Location? = null
 
+    var isLocationOn = true
+
     /*
     DATABASE ATTRIBUTES #####################################################################################
      */
@@ -139,7 +141,7 @@ class TrackerViewModel(
 
     fun onStart() {
         distanceTravelled = 0f
-        startLocationUpdates()
+        if (!isLocationOn) startLocationUpdates()
         uiScope.launch {
             // Create a new night, which captures the current time,
             // and insert it into the database.
@@ -162,6 +164,7 @@ class TrackerViewModel(
      */
     fun onStop() {
         stopLocationUpdates()
+        isLocationOn = false
         uiScope.launch {
             // In Kotlin, the return@label syntax is used for specifying which function among
             // several nested ones this statement returns from.
@@ -171,8 +174,6 @@ class TrackerViewModel(
             // Update the night in the database to add the end time.
             oldRun.endTimeMilli = System.currentTimeMillis()
             oldRun.distanceTravelled = distanceTravelled
-
-            if (currentlocation == null) currentlocation = pastlocation
 
             oldRun.endPositionLat = currentlocation?.latitude!!
             oldRun.endPositionLon = currentlocation?.longitude!!
@@ -257,6 +258,7 @@ class TrackerViewModel(
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 pastlocation = location
+                currentlocation = location
                 //Log.i("tracker", pastlocation.toString())
             }
     }

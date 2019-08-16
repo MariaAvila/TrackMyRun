@@ -70,8 +70,14 @@ class DetailsFragment : Fragment() {
         })
 
         detailsViewModel.run.observe(this, Observer { run ->
-            binding.distanceTextView.text = getString(R.string.distance_length,run.distanceTravelled.toInt())
-            binding.durationTextView.text = convertDurationToFormatted(run.startTimeMilli,run.endTimeMilli,application.resources)
+            if(run.startTimeMilli == run.endTimeMilli){
+                binding.durationTextView.text = convertDurationToFormatted(run.startTimeMilli, System.currentTimeMillis(),application.resources)
+                binding.distanceTextView.text = getString(R.string.still_running)
+            }
+            else{
+                binding.durationTextView.text = convertDurationToFormatted(run.startTimeMilli,run.endTimeMilli,application.resources)
+                binding.distanceTextView.text = getString(R.string.distance_length,run.distanceTravelled.toInt())
+            }
         })
 
         return binding.root

@@ -74,6 +74,8 @@ class TrackerFragment : Fragment(){
         })
 
         trackerViewModel.createAssets(application.applicationContext)
+        trackerViewModel.startLocationUpdates()
+        trackerViewModel.isLocationOn = true
 
         trackerViewModel.showSnackBarEvent.observe(this, Observer {
             if (it == true) { // Observed state is true.
