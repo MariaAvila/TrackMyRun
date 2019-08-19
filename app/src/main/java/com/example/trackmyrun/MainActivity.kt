@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import android.content.Intent
-import android.widget.PopupWindow
 import android.widget.Toast
-import androidx.annotation.NonNull
 
 
 
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun restartApp(){
-        //Toast.makeText(this, "Restarting app", Toast.LENGTH_SHORT).show()
         val i = this.baseContext.packageManager
             .getLaunchIntentForPackage(this.baseContext.packageName)
         i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

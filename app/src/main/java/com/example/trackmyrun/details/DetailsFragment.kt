@@ -1,6 +1,5 @@
 package com.example.trackmyrun.details
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
