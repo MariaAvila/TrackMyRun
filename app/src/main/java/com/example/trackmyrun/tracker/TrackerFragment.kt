@@ -1,5 +1,6 @@
 package com.example.trackmyrun.tracker
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,13 @@ import com.example.trackmyrun.databinding.TrackerFragmentBinding
 import com.example.trackmyrun.R
 import com.example.trackmyrun.database.MyRunDatabase
 import com.google.android.material.snackbar.Snackbar
+import android.Manifest.permission
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import androidx.core.app.ActivityCompat
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
+
+
 
 class TrackerFragment : Fragment(){
 
@@ -102,9 +110,5 @@ class TrackerFragment : Fragment(){
         return binding.root
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-    }
 
 }

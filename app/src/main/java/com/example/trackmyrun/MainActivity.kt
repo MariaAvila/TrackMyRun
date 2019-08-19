@@ -1,23 +1,66 @@
 package com.example.trackmyrun
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import android.content.Intent
+import android.widget.PopupWindow
+import android.widget.Toast
+import androidx.annotation.NonNull
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        fun newInstance() = MainActivity()
-    }
-
+    private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
-        ActivityCompat.requestPermissions(this, permissions,0)
+        enableMyLocation()
 
+    }
+
+    private fun enableMyLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(this, permissions, 0)
+
+        }
+    }
+
+    private fun restartApp(){
+        //Toast.makeText(this, "Restarting app", Toast.LENGTH_SHORT).show()
+        val i = this.baseContext.packageManager
+            .getLaunchIntentForPackage(this.baseContext.packageName)
+        i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(i)
+        this.finish()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            0 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                enableMyLocation()
+                restartApp()
+            }else{
+                Toast.makeText(this, "App needs Location, please enable", Toast.LENGTH_LONG).show()
+                this.finish()
+            }
+        }
     }
 }
