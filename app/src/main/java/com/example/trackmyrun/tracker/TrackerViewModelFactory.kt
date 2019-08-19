@@ -11,12 +11,11 @@ import com.example.trackmyrun.database.MyRunDatabaseDao
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
 class TrackerViewModelFactory (
-    private val dataSource: MyRunDatabaseDao,
-    private val application: Application): ViewModelProvider.Factory {
+    private val dataSource: MyRunDatabaseDao): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TrackerViewModel::class.java)) {
-            return TrackerViewModel(dataSource,application) as T
+            return TrackerViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

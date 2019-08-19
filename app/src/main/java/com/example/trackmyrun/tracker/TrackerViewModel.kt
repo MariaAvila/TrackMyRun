@@ -16,8 +16,7 @@ import kotlinx.coroutines.*
 
 
 class TrackerViewModel(
-    dataSource: MyRunDatabaseDao,
-    application: Application
+    dataSource: MyRunDatabaseDao
 ) : ViewModel(){
 
     /*

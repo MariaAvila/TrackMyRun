@@ -29,9 +29,6 @@ class TrackerFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        if(savedInstanceState != null){
-
-        }
 
         val binding: TrackerFragmentBinding = DataBindingUtil.inflate(inflater,
             R.layout.tracker_fragment,container,false)
@@ -40,13 +37,12 @@ class TrackerFragment : Fragment(){
 
         val dataSource = MyRunDatabase.getInstance(application).myRunDatabaseDao
 
-        val viewModelFactory = TrackerViewModelFactory(dataSource, application)
+        val viewModelFactory = TrackerViewModelFactory(dataSource)
 
         // Get a reference to the ViewModel associated with this fragment.
         val trackerViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory).get(TrackerViewModel::class.java)
-
 
         binding.trackerViewModel = trackerViewModel
 
